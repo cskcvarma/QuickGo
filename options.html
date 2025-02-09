@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Go Shortcuts Options</title>
+  <style>
+    :root {
+      --primary-color: #4a90e2;
+      --hover-color: #357abd;
+      --border-radius: 8px;
+      --max-width: 1200px;
+    }
+
+    body { 
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      margin: 0;
+      padding: 40px;
+      background: #f5f7fa;
+      color: #2c3e50;
+      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .container {
+      width: 100%;
+      max-width: var(--max-width);
+    }
+
+    h2 {
+      color: #1a365d;
+      margin-bottom: 30px;
+      font-weight: 600;
+      font-size: 28px;
+    }
+
+    .content-wrapper {
+      display: grid;
+      grid-template-columns: 350px 1fr;
+      gap: 30px;
+      align-items: start;
+    }
+
+    table { 
+      border-collapse: separate;
+      border-spacing: 0;
+      width: 100%;
+      background: white;
+      border-radius: var(--border-radius);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    th, td { 
+      padding: 16px 24px;
+      text-align: left;
+      border-bottom: 1px solid #edf2f7;
+    }
+
+    th { 
+      background: #f8fafc;
+      font-weight: 600;
+      color: #4a5568;
+      font-size: 15px;
+    }
+
+    td {
+      font-size: 14px;
+    }
+
+    th:first-child {
+      border-top-left-radius: var(--border-radius);
+    }
+
+    th:last-child {
+      border-top-right-radius: var(--border-radius);
+    }
+
+    tr:last-child td:first-child {
+      border-bottom-left-radius: var(--border-radius);
+    }
+
+    tr:last-child td:last-child {
+      border-bottom-right-radius: var(--border-radius);
+    }
+
+    td.actions {
+      min-width: 160px;
+    }
+
+    td.actions button { 
+      margin-right: 12px;
+      padding: 6px 12px;
+    }
+
+    .edit-btn {
+      background: var(--primary-color);
+    }
+
+    .edit-btn:hover {
+      background: var(--hover-color);
+    }
+
+    .delete-btn {
+      background: #fff;
+      color: #dc3545;
+      border: 1px solid #dc3545;
+    }
+
+    .delete-btn:hover {
+      background: #dc3545;
+      color: #fff;
+    }
+
+    td.actions button:hover {
+      transform: none;
+      box-shadow: none;
+    }
+
+    .form-row { 
+      margin-bottom: 20px;
+    }
+
+    #shortcutForm {
+      background: white;
+      padding: 30px;
+      border-radius: var(--border-radius);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 30px;
+    }
+
+    input[type="text"],
+    input[type="url"] {
+      width: 100%;
+      padding: 10px 14px;
+      border: 2px solid #e2e8f0;
+      border-radius: var(--border-radius);
+      font-size: 14px;
+      transition: all 0.2s ease;
+      box-sizing: border-box;
+    }
+
+    input[type="text"]:focus,
+    input[type="url"]:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+    }
+
+    input[type="text"]::placeholder,
+    input[type="url"]::placeholder {
+      color: #a0aec0;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+      color: #4a5568;
+      font-size: 15px;
+    }
+
+    button {
+      background: var(--primary-color);
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: var(--border-radius);
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.2s ease;
+      font-size: 14px;
+    }
+
+    button:hover {
+      background: var(--hover-color);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(74, 144, 226, 0.15);
+    }
+
+    #exportBtn, #importBtn {
+      background: #2d3748;
+    }
+
+    #exportBtn:hover, #importBtn:hover {
+      background: #1a202c;
+    }
+
+    #saveBtn {
+      margin-top: 10px;
+      width: 100%;
+    }
+
+    .import-export {
+      margin-top: 30px;
+      display: flex;
+      gap: 12px;
+      flex-direction: column;
+    }
+
+    .import-export button {
+      width: 100%;
+    }
+
+    .search-container {
+      margin-bottom: 20px;
+    }
+
+    #searchInput {
+      width: 100%;
+      padding: 10px 14px;
+      border: 2px solid #e2e8f0;
+      border-radius: var(--border-radius);
+      font-size: 14px;
+      transition: all 0.2s ease;
+      box-sizing: border-box;
+      margin-bottom: 16px;
+    }
+
+    #searchInput:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+    }
+
+    #searchInput::placeholder {
+      color: #a0aec0;
+    }
+
+    @media (max-width: 900px) {
+      .content-wrapper {
+        grid-template-columns: 1fr;
+      }
+      
+      #shortcutForm {
+        position: static;
+      }
+      
+      body {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Manage Go Shortcuts</h2>
+    
+    <div class="content-wrapper">
+      <!-- Form to add or edit a shortcut -->
+      <form id="shortcutForm">
+        <div class="form-row">
+          <label for="shortcutName">Shortcut</label>
+          <input type="text" id="shortcutName" placeholder="Enter shortcut name" required />
+        </div>
+        <div class="form-row">
+          <label for="shortcutURL">URL</label>
+          <input type="url" id="shortcutURL" placeholder="https://example.com" required />
+        </div>
+        <button type="submit" id="saveBtn">Add Shortcut</button>
+        
+        <!-- Moved import/export buttons here -->
+        <div class="import-export">
+          <button id="exportBtn">Export Shortcuts</button>
+          <button id="importBtn">Import Shortcuts</button>
+          <input type="file" id="importFile" accept=".json" style="display:none" />
+        </div>
+      </form>
+      
+      <!-- Table listing existing shortcuts -->
+      <div class="table-container">
+        <!-- Added search input -->
+        <div class="search-container">
+          <input type="text" id="searchInput" placeholder="Search shortcuts..." />
+        </div>
+        <table id="shortcutsTable">
+          <thead>
+            <tr>
+              <th>Shortcut</th>
+              <th>URL</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="shortcutsList">
+            <!-- Shortcut entries will be populated by options.js -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  
+  <script src="options.js"></script>
+</body>
+</html> 
